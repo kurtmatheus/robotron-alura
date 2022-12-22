@@ -45,10 +45,12 @@ controle.forEach( (elemento) => {
 function manipulaDados(operacao, controle) {
     const peca = controle.querySelector("[data-contador]")
 
-    if(operacao === "-") {
-        peca.value = parseInd(peca.value) - 1
-    } else {
-        peca.value = parseInt(peca.value) + 1
+    if(parseInt(peca.value) >= 0) {
+        if(operacao === "-") {
+            peca.value = parseInt(peca.value) - 1
+        } else {
+            peca.value = parseInt(peca.value) + 1
+        }
     }
 }
 
@@ -57,3 +59,17 @@ function atualizaEstatistica(peca) {
         elemento.textContent = parseInt(elemento.textContent) + pecas[peca][elemento.dataset.estatistica]
     })
 }
+
+const cores = document.querySelectorAll("[data-cor]");
+
+cores.forEach((elemento) => {
+    elemento.addEventListener('click', (evento) => {
+        atualizaCor(elemento.dataset.cor);
+    })
+})
+
+function atualizaCor(cor) {
+    console.log(cor)
+    document.querySelector(".robo").src = "img/" + cor + ".png";
+}
+
